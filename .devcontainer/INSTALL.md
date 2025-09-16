@@ -1,0 +1,1 @@
+Install Conflicts ROS2 Jazzy with Gymnasium/StableBaseline, due to Numpy and Python version. Switched to ROS2 Humble.

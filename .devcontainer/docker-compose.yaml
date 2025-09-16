@@ -1,0 +1,31 @@
+services:
+  end_to_end_learning_container:
+    image: ros2/end_to_end_learning
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: ros2_end_to_end_learning_container
+    privileged: true
+    network_mode: host
+    command: /bin/bash
+    security_opt:
+      - seccomp:unconfined
+    tty: true
+    ipc: host
+    gpus: all
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    volumes:
+      - ../../ros2_ws:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $XAUTHORITY:/root/.Xauthority
+    environment:
+      DISPLAY: $DISPLAY
+      QT_X11_NO_MITSHM: 1
+      NVIDIA_VISIBLE_DEVICES: "0"
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
