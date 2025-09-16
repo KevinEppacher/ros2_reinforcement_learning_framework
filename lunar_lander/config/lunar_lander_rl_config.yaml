@@ -1,0 +1,42 @@
+lunar_lander:
+  rl_trainers:
+    ros__parameters:
+      metadata:
+        mode: eval              # "train" or "eval"
+        task: lunar_lander_vec
+        artifacts_dir: /app/src/lunar_lander/data
+      algorithm:
+        name: ppo                # must match trained algo
+        device: auto             # "cpu" | "cuda" | "auto"
+        policy: MlpPolicy        # must match trained policy
+      train:
+        total_timesteps: 300000  # only used if mode == "train"
+        save_freq: 100000
+        progress: true
+        n_envs: 6 
+      eval:
+        episodes: 20             # only used if mode == "eval"
+        deterministic: true
+        render: true
+        video: false
+        model_path: "/app/src/lunar_lander/data/model/PPO/lunar_lander_20250911_18_46"
+        n_envs: 1
+      ppo:
+        learning_rate: 3.0e-4
+        n_steps: 2048
+        batch_size: 256
+        n_epochs: 10
+        gamma: 0.99
+        gae_lambda: 0.95
+        clip_range: 0.2
+        ent_coef: 0.0
+        vf_coef: 0.5
+        max_grad_norm: 0.5
+        normalize_advantage: true
+        use_sde: false
+        sde_sample_freq: -1
+        target_kl: -1.0
+        stats_window_size: 100
+        seed: 0
+        tensorboard: true
+        policy_kwargs: "{}"

@@ -49,3 +49,7 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+
+car_racing/data/
+lunar_lander/data/
+cartpole/data/
